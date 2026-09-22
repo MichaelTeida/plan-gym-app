@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main", "master"]
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -18,36 +18,25 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-
-      - name: Configure GitHub Pages
-        id: pages
-        uses: actions/configure-pages@v5
+          node-version: 20
+          cache: 'npm'
 
       - name: Install dependencies
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci
-          else
-            npm install
-          fi
+        run: npm ci
 
-      - name: Build Next.js static export
-        env:
-          GITHUB_PAGES: "true"
-          NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+      - name: Build
         run: npm run build
 
-      - name: Upload Pages artifact
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out
+          path: ./dist
 
   deploy:
     environment:
