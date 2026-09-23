@@ -103,6 +103,7 @@ export default function App() {
         activeRoutineId={activeRoutineId}
         onSelectRoutine={setActiveRoutineId}
         onOpenSettings={() => setIsSettingsOpen(true)}
+        fontSizePercent={settings.fontSizePercent}
       />
 
       <main className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 w-full flex-1">

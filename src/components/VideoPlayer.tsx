@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { Play, Pause, Maximize2, Minimize2, RotateCcw } from 'lucide-react';
+import { Play, Pause, Maximize2, Minimize2, RotateCcw, Loader2 } from 'lucide-react';
 
 interface VideoPlayerProps {
   src: string;
@@ -23,6 +23,8 @@ export function VideoPlayer({ src, title, autoplayEnabled = true }: VideoPlayerP
   const [isPlaying, setIsPlaying] = useState(false);
   const [isInViewport, setIsInViewport] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasEnteredViewport, setHasEnteredViewport] = useState(false);
 
   const [scale, setScale] = useState(1);
   const [pan, setPan] = useState({ x: 0, y: 0 });
@@ -53,11 +55,14 @@ export function VideoPlayer({ src, title, autoplayEnabled = true }: VideoPlayerP
       (entries) => {
         entries.forEach((entry) => {
           setIsInViewport(entry.isIntersecting);
+          if (entry.isIntersecting) {
+            setHasEnteredViewport(true);
+          }
         });
       },
       {
-        threshold: 0.25,
-        rootMargin: '50px 0px 50px 0px'
+        threshold: 0.1,
+        rootMargin: '200px 0px 200px 0px'
       }
     );
 
@@ -107,7 +112,7 @@ export function VideoPlayer({ src, title, autoplayEnabled = true }: VideoPlayerP
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !hasEnteredViewport) return;
 
     if (autoplayEnabled && isInViewport) {
       const playPromise = video.play();
@@ -117,7 +122,11 @@ export function VideoPlayer({ src, title, autoplayEnabled = true }: VideoPlayerP
     } else {
       video.pause();
     }
-  }, [isInViewport, autoplayEnabled, src]);
+  }, [isInViewport, autoplayEnabled, src, hasEnteredViewport]);
+
+  useEffect(() => {
+    setIsLoading(true);
+  }, [src]);
 
   const togglePlayPause = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
@@ -278,6 +287,15 @@ export function VideoPlayer({ src, title, autoplayEnabled = true }: VideoPlayerP
       onTouchEnd={handleTouchEnd}
       onTouchCancel={handleTouchEnd}
     >
+      {isLoading && !isFullscreen && (
+        <div className="absolute inset-0 z-20 flex items-center justify-center bg-neutral-100 dark:bg-neutral-800">
+          <div className="flex flex-col items-center gap-2 text-neutral-400 dark:text-neutral-500">
+            <Loader2 className="w-6 h-6 animate-spin" />
+            <span className="text-xs font-medium">Wczytywanie wideo...</span>
+          </div>
+        </div>
+      )}
+
       <div
         className="w-full h-full flex items-center justify-center pointer-events-none"
         style={{
@@ -290,22 +308,26 @@ export function VideoPlayer({ src, title, autoplayEnabled = true }: VideoPlayerP
           willChange: isFullscreen ? 'transform' : undefined
         }}
       >
-        <video
-          ref={videoRef}
-          src={src}
-          title={title}
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          onPlaying={() => setIsPlaying(true)}
-          onPause={() => setIsPlaying(false)}
-          className={
-            isFullscreen
-              ? 'w-full h-full object-contain pointer-events-auto'
-              : 'w-full h-full object-cover pointer-events-auto'
-          }
-        />
+        {hasEnteredViewport && (
+          <video
+            ref={videoRef}
+            src={src}
+            title={title}
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            onCanPlay={() => setIsLoading(false)}
+            onPlaying={() => { setIsPlaying(true); setIsLoading(false); }}
+            onPause={() => setIsPlaying(false)}
+            onWaiting={() => setIsLoading(true)}
+            className={
+              isFullscreen
+                ? 'w-full h-full object-contain pointer-events-auto'
+                : 'w-full h-full object-cover pointer-events-auto'
+            }
+          />
+        )}
       </div>
 
       <div className="absolute inset-0 pointer-events-none p-2.5 sm:p-3 flex flex-col justify-between z-10">
