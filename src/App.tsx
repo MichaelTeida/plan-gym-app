@@ -8,6 +8,8 @@ import { CelebrationModal } from '@/components/CelebrationModal';
 import { WorkoutInfoModal } from '@/components/WorkoutInfoModal';
 import { Info } from 'lucide-react';
 
+const CELEBRATION_COOLDOWN_MS = 12 * 60 * 60 * 1000;
+
 export default function App() {
   const { activeRoutineId, setActiveRoutineId } = useActiveRoutine();
   const { settings, updateSettings } = useAppSettings();
@@ -70,10 +72,25 @@ export default function App() {
         }
 
         if (allCompleted) {
-          setCelebrationRoutineTitle(currentRoutine.title);
-          setIsCelebrationOpen(true);
+          const storageKey = `fbw_last_celebration_${activeRoutineId}`;
+          const lastCelebration = Number(localStorage.getItem(storageKey) || 0);
+          const now = Date.now();
+
+          if (now - lastCelebration > CELEBRATION_COOLDOWN_MS) {
+            localStorage.setItem(storageKey, String(now));
+            setCelebrationRoutineTitle(currentRoutine.title);
+            setIsCelebrationOpen(true);
+          }
         }
       }
+    } catch {}
+  };
+
+  const handleResetSetsWithCooldown = () => {
+    resetSets();
+    try {
+      localStorage.removeItem(`fbw_last_celebration_trening-a`);
+      localStorage.removeItem(`fbw_last_celebration_trening-b`);
     } catch {}
   };
 
@@ -126,7 +143,7 @@ export default function App() {
         onClose={() => setIsSettingsOpen(false)}
         settings={settings}
         onUpdateSettings={updateSettings}
-        onResetSets={resetSets}
+        onResetSets={handleResetSetsWithCooldown}
       />
 
       <WorkoutInfoModal

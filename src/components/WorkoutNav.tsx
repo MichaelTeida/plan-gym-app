@@ -30,14 +30,14 @@ export function WorkoutNav({
                   key={routine.id}
                   type="button"
                   onClick={() => onSelectRoutine(routine.id)}
-                  className={`px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap ${
+                  className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap ${
                     isActive
                       ? 'bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white shadow-xs border border-neutral-200/60 dark:border-transparent'
                       : 'text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white'
                   }`}
                 >
-                  <span className="sm:hidden">Tren. {routine.code}</span>
-                  <span className="hidden sm:inline">Trening {routine.code}</span>
+                  <span className="max-[415px]:inline hidden">Tren. {routine.code}</span>
+                  <span className="max-[415px]:hidden inline">Trening {routine.code}</span>
                 </button>
               );
             })}
