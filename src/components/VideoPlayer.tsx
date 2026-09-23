@@ -269,7 +269,7 @@ export function VideoPlayer({ src, title, autoplayEnabled = true }: VideoPlayerP
       ref={containerRef}
       className={
         isFullscreen
-          ? 'fixed inset-0 z-50 w-screen h-screen bg-black flex items-center justify-center select-none touch-none overflow-hidden'
+          ? 'fixed inset-0 z-50 w-full h-full bg-black flex items-center justify-center select-none touch-none overflow-hidden'
           : 'relative w-full aspect-video rounded-xl overflow-hidden bg-neutral-100 dark:bg-neutral-800 select-none cursor-pointer group'
       }
       onClick={!isFullscreen ? () => togglePlayPause() : undefined}
@@ -302,39 +302,25 @@ export function VideoPlayer({ src, title, autoplayEnabled = true }: VideoPlayerP
           onPause={() => setIsPlaying(false)}
           className={
             isFullscreen
-              ? 'max-w-full max-h-full object-contain pointer-events-auto'
+              ? 'w-full h-full object-contain pointer-events-auto'
               : 'w-full h-full object-cover pointer-events-auto'
           }
         />
       </div>
 
-      <div className="absolute inset-0 pointer-events-none p-3 sm:p-4 flex flex-col justify-between z-10">
-        <div className="flex items-center justify-between w-full">
+      <div className="absolute inset-0 pointer-events-none p-2.5 sm:p-3 flex flex-col justify-between z-10">
+        <div className="flex items-center justify-start w-full">
           {isFullscreen && scale > 1.05 && (
             <button
               type="button"
               onClick={resetZoom}
               aria-label="Zresetuj przybliżenie"
               title="Resetuj zoom"
-              className="pointer-events-auto px-3 py-1.5 rounded-xl bg-black/60 hover:bg-black/80 backdrop-blur-md text-white text-xs font-bold flex items-center gap-1.5 transition-all active:scale-95 shadow-xs"
+              className="pointer-events-auto px-2.5 py-1 rounded-xl bg-black/60 hover:bg-black/80 backdrop-blur-md text-white text-[0.8em] font-bold flex items-center gap-1.5 transition-all active:scale-95 shadow-xs"
             >
-              <RotateCcw className="w-3.5 h-3.5" />
+              <RotateCcw className="w-[1em] h-[1em]" />
               <span>{Math.round(scale * 100)}%</span>
             </button>
-          )}
-
-          {isFullscreen && (
-            <div className="ml-auto pointer-events-auto">
-              <button
-                type="button"
-                onClick={toggleFullscreen}
-                aria-label="Zamknij pełny ekran"
-                title="Zamknij"
-                className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-black/60 hover:bg-black/80 backdrop-blur-md text-white flex items-center justify-center transition-all active:scale-95 shadow-xs"
-              >
-                <Minimize2 className="w-4 h-4 sm:w-5 sm:h-5" />
-              </button>
-            </div>
           )}
         </div>
 
@@ -344,26 +330,28 @@ export function VideoPlayer({ src, title, autoplayEnabled = true }: VideoPlayerP
             onClick={togglePlayPause}
             aria-label={isPlaying ? 'Zatrzymaj wideo' : 'Odtwórz wideo'}
             title={isPlaying ? 'Zatrzymaj' : 'Odtwórz'}
-            className="pointer-events-auto w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-black/60 hover:bg-black/80 backdrop-blur-md text-white flex items-center justify-center transition-all active:scale-95 shadow-xs"
+            className="pointer-events-auto w-[2.2em] h-[2.2em] min-w-[32px] min-h-[32px] rounded-xl bg-black/60 hover:bg-black/80 backdrop-blur-md text-white flex items-center justify-center transition-all active:scale-95 shadow-xs text-base"
           >
             {isPlaying ? (
-              <Pause className="w-4 h-4 sm:w-5 sm:h-5 fill-white" />
+              <Pause className="w-[1em] h-[1em] fill-white" />
             ) : (
-              <Play className="w-4 h-4 sm:w-5 sm:h-5 fill-white ml-0.5" />
+              <Play className="w-[1em] h-[1em] fill-white ml-[0.1em]" />
             )}
           </button>
 
-          {!isFullscreen && (
-            <button
-              type="button"
-              onClick={toggleFullscreen}
-              aria-label="Pełny ekran"
-              title="Pełny ekran"
-              className="pointer-events-auto w-8 h-8 rounded-xl bg-black/60 hover:bg-black/80 backdrop-blur-md text-white flex items-center justify-center transition-all active:scale-95 shadow-xs"
-            >
-              <Maximize2 className="w-4 h-4" />
-            </button>
-          )}
+          <button
+            type="button"
+            onClick={toggleFullscreen}
+            aria-label={isFullscreen ? 'Opuść pełny ekran' : 'Pełny ekran'}
+            title={isFullscreen ? 'Opuść pełny ekran' : 'Pełny ekran'}
+            className="pointer-events-auto w-[2.2em] h-[2.2em] min-w-[32px] min-h-[32px] rounded-xl bg-black/60 hover:bg-black/80 backdrop-blur-md text-white flex items-center justify-center transition-all active:scale-95 shadow-xs text-base"
+          >
+            {isFullscreen ? (
+              <Minimize2 className="w-[1em] h-[1em]" />
+            ) : (
+              <Maximize2 className="w-[1em] h-[1em]" />
+            )}
+          </button>
         </div>
       </div>
     </div>
