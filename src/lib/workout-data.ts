@@ -34,8 +34,8 @@ export const WORKOUT_ROUTINES: WorkoutRoutine[] = [
         id: 'a-1',
         number: 1,
         title: 'Przysiad goblet z hantlem lub Wypychanie na suwnicy',
-        setsReps: '5 × 5',
-        setsCount: 5,
+        setsReps: '4 × 8',
+        setsCount: 4,
         category: 'Nogi i Pośladki',
         variants: [
           {
@@ -48,11 +48,11 @@ export const WORKOUT_ROUTINES: WorkoutRoutine[] = [
           },
           {
             id: 'a-1-suwnica',
-            name: 'Wypychanie na suwnicy (stopy wysoko)',
+            name: 'Wypychanie na suwnicy',
             shortName: 'Wypychanie na suwnicy',
             videoUrl: 'https://static.fabrykasily.pl/atlas-kobiet/video-wypychanie-nogami-suwnicy.mp4',
             guideUrl: 'https://www.fabrykasily.pl/atlas-cwiczen/cwiczenia-dla-kobiet/nogi/wypychanie-nogami-na-suwnicy',
-            muscles: ['Pośladki', 'Dwugłowe ud (tył)']
+            muscles: ['Czworogłowe ud', 'Pośladki']
           }
         ]
       },
@@ -60,8 +60,8 @@ export const WORKOUT_ROUTINES: WorkoutRoutine[] = [
         id: 'a-2',
         number: 2,
         title: 'Wyciskanie sztangielek lub sztangi na ławce poziomej',
-        setsReps: '5 × 5',
-        setsCount: 5,
+        setsReps: '4 × 8',
+        setsCount: 4,
         category: 'Klatka piersiowa',
         variants: [
           {
@@ -86,8 +86,8 @@ export const WORKOUT_ROUTINES: WorkoutRoutine[] = [
         id: 'a-3',
         number: 3,
         title: 'Wiosłowanie hantlą w klęku podpartym na ławeczce',
-        setsReps: '5 × 5',
-        setsCount: 5,
+        setsReps: '4 × 8',
+        setsCount: 4,
         category: 'Plecy',
         variants: [
           {
@@ -103,31 +103,13 @@ export const WORKOUT_ROUTINES: WorkoutRoutine[] = [
       {
         id: 'a-4',
         number: 4,
-        title: 'Wznosy bokiem ze sztangielkami',
-        setsReps: '3 × 8',
-        setsCount: 3,
-        category: 'Barki',
-        variants: [
-          {
-            id: 'a-4-wznosy',
-            name: 'Odwodzenie ramion w bok',
-            shortName: 'Wznosy bokiem',
-            videoUrl: 'https://static.fabrykasily.pl/atlas/odwodzenie_ramion_w_bok_ze_sztangielkami.mp4',
-            guideUrl: 'https://www.fabrykasily.pl/cwiczenia/na-barki/odwodzenie-ramion-w-bok-ze-sztangielkami',
-            muscles: ['Barki (boczny akton)']
-          }
-        ]
-      },
-      {
-        id: 'a-5',
-        number: 5,
         title: 'Hip thrust hantlem lub sztangą',
         setsReps: '3 × 8',
         setsCount: 3,
         category: 'Nogi i Pośladki',
         variants: [
           {
-            id: 'a-5-hantel',
+            id: 'a-4-hantel',
             name: 'Hip thrust z hantlem',
             shortName: 'Z hantlem',
             videoUrl: 'https://static.fabrykasily.pl/atlas-kobiet/video-unoszenie-bioder-z-hantla-w-oparciu-o-laweczke.mp4',
@@ -135,7 +117,7 @@ export const WORKOUT_ROUTINES: WorkoutRoutine[] = [
             muscles: ['Pośladki', 'Tył ud']
           },
           {
-            id: 'a-5-sztanga',
+            id: 'a-4-sztanga',
             name: 'Hip thrust ze sztangą',
             shortName: 'Ze sztangą',
             videoUrl: 'https://static.fabrykasily.pl/atlas-kobiet/video-unoszenie-bioder-ze-sztanga-w-oparciu-o-laweczke.mp4',
@@ -145,10 +127,28 @@ export const WORKOUT_ROUTINES: WorkoutRoutine[] = [
         ]
       },
       {
+        id: 'a-5',
+        number: 5,
+        title: 'Wznosy bokiem ze sztangielkami',
+        setsReps: '3 × 10',
+        setsCount: 3,
+        category: 'Barki',
+        variants: [
+          {
+            id: 'a-5-wznosy',
+            name: 'Odwodzenie ramion w bok',
+            shortName: 'Wznosy bokiem',
+            videoUrl: 'https://static.fabrykasily.pl/atlas/odwodzenie_ramion_w_bok_ze_sztangielkami.mp4',
+            guideUrl: 'https://www.fabrykasily.pl/cwiczenia/na-barki/odwodzenie-ramion-w-bok-ze-sztangielkami',
+            muscles: ['Barki (boczny akton)']
+          }
+        ]
+      },
+      {
         id: 'a-6',
         number: 6,
         title: 'Przyciąganie kolan do klatki na stojaku lub Spięcia brzucha na maszynie',
-        setsReps: '3 × 8',
+        setsReps: '3 × 10',
         setsCount: 3,
         category: 'Brzuch',
         variants: [
@@ -174,7 +174,7 @@ export const WORKOUT_ROUTINES: WorkoutRoutine[] = [
         id: 'a-7',
         number: 7,
         title: 'Wspięcia na palcach siedząc na maszynie lub stojąc z hantlami',
-        setsReps: '3 × 8',
+        setsReps: '3 × 12',
         setsCount: 3,
         category: 'Łydki',
         variants: [
@@ -224,9 +224,9 @@ export const WORKOUT_ROUTINES: WorkoutRoutine[] = [
       {
         id: 'b-1',
         number: 1,
-        title: 'Martwy ciąg na prostych nogach z hantlami',
-        setsReps: '5 × 5',
-        setsCount: 5,
+        title: 'Martwy ciąg rumuński z hantlami',
+        setsReps: '4 × 8',
+        setsCount: 4,
         category: 'Nogi i Pośladki',
         variants: [
           {
@@ -243,8 +243,8 @@ export const WORKOUT_ROUTINES: WorkoutRoutine[] = [
         id: 'b-2',
         number: 2,
         title: 'Wyciskanie hantli nad głowę stojąc',
-        setsReps: '5 × 5',
-        setsCount: 5,
+        setsReps: '4 × 8',
+        setsCount: 4,
         category: 'Barki',
         variants: [
           {
@@ -261,8 +261,8 @@ export const WORKOUT_ROUTINES: WorkoutRoutine[] = [
         id: 'b-3',
         number: 3,
         title: 'Ściąganie drążka wyciągu górnego do klatki',
-        setsReps: '5 × 5',
-        setsCount: 5,
+        setsReps: '4 × 8',
+        setsCount: 4,
         category: 'Plecy',
         variants: [
           {
@@ -279,7 +279,7 @@ export const WORKOUT_ROUTINES: WorkoutRoutine[] = [
         id: 'b-4',
         number: 4,
         title: 'Zakroki z hantlami lub bez',
-        setsReps: '3 × 8',
+        setsReps: '3 × 10',
         setsCount: 3,
         category: 'Nogi i Pośladki',
         variants: [
@@ -305,7 +305,7 @@ export const WORKOUT_ROUTINES: WorkoutRoutine[] = [
         id: 'b-5',
         number: 5,
         title: 'Odwodzenie nogi na maszynie',
-        setsReps: '3 × 8',
+        setsReps: '3 × 12',
         setsCount: 3,
         category: 'Nogi i Pośladki',
         variants: [
@@ -323,7 +323,7 @@ export const WORKOUT_ROUTINES: WorkoutRoutine[] = [
         id: 'b-6',
         number: 6,
         title: 'Plank (Deska)',
-        setsReps: '3 × max czas',
+        setsReps: '3 × 30s',
         setsCount: 3,
         category: 'Brzuch',
         variants: [
@@ -341,7 +341,7 @@ export const WORKOUT_ROUTINES: WorkoutRoutine[] = [
         id: 'b-7',
         number: 7,
         title: 'Wspięcia na palcach siedząc na maszynie lub stojąc z hantlami',
-        setsReps: '3 × 8',
+        setsReps: '3 × 12',
         setsCount: 3,
         category: 'Łydki',
         variants: [
