@@ -320,7 +320,6 @@ export function VideoPlayer({ src, title, autoplayEnabled = true }: VideoPlayerP
             onCanPlay={() => setIsLoading(false)}
             onPlaying={() => { setIsPlaying(true); setIsLoading(false); }}
             onPause={() => setIsPlaying(false)}
-            onWaiting={() => setIsLoading(true)}
             className={
               isFullscreen
                 ? 'w-full h-full object-contain pointer-events-auto'
