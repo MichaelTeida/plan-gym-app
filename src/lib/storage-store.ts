@@ -80,7 +80,8 @@ export function useCompletedSets() {
   const resetSets = () => {
     try {
       localStorage.removeItem('fbw_completed_sets');
-      lastRawSets = null;
+      lastRawSets = '__reset__';
+      cachedSets = EMPTY_SETS;
       notifyStorageChange();
     } catch {}
   };
